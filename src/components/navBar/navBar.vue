@@ -1,15 +1,17 @@
 <template>
-  <div id="aboutUS">
-    aboutUs
+  <div id="navBar">
+    navBar
   </div>
 </template>
 
 <script>
 export default {
-  name: "aboutUs"
+  name: "navBar"
 }
 </script>
 
 <style scoped>
+  #navBar{
 
+  }
 </style>

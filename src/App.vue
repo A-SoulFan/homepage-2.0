@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <nav-bar></nav-bar>
     <launch-screen></launch-screen>
     <top-contents></top-contents>
     <common-tools></common-tools>
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import navBar from "./components/navBar/navBar";
 import aboutUs from "./components/aboutUs/aboutUs";
 import commonTools from "./components/commonTools/commonTools";
 import launchScreen from "./components/launchScreen/launchScreen";
@@ -16,6 +18,7 @@ import topContents from "./components/topContents/topContents";
 export default {
   name: 'App',
   components: {
+    navBar,
     aboutUs,
     commonTools,
     launchScreen,
@@ -26,11 +29,6 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
