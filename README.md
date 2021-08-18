@@ -1,24 +1,27 @@
 # asf-mainpage-2.0
 
-## Project setup
+### 运行前安装
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 实时调试
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 yarn build
 ```
 
-### Lints and fixes files
+### 代码检测
 ```
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Commit时备注
+* 增加从未有过的功能，即新增功能性提交：`<feat>: +提交说明`
+* 改变从前的功能，即不影响页面功能的提交：`<style>: +提交说明`
+* 修复从前的功能，即新增修复性提交： `<fix>: +提交说明`
+* 提交说明可以使用中文
