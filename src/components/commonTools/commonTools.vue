@@ -10,6 +10,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+#commonTools{
+  width: 100vw;
+  background-color: black;
+}
 </style>
