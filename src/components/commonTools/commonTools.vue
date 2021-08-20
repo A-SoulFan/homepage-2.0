@@ -11,8 +11,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#commonTools{
+#commonTools {
   width: 100vw;
-  background-color: black;
+  height: 500px;
 }
 </style>

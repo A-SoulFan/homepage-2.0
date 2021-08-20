@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+#launchScreen{
+  width: 100vw;
+}
 </style>

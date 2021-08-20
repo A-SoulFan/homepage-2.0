@@ -16,6 +16,9 @@ import launchScreen from "./components/launchScreen/launchScreen";
 import topContents from "./components/topContents/topContents";
 
 export default {
+  beforeCreate() {
+    document.getElementsByTagName("body")[0].setAttribute("style","margin:0");
+  },
   name: 'App',
   components: {
     navBar,
@@ -30,5 +33,6 @@ export default {
 <style>
 #app {
   text-align: center;
+  margin:0;
 }
 </style>

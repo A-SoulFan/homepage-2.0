@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-  #navBar{
+#navBar{
 
-  }
+}
 </style>

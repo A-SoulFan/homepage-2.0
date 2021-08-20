@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+#aboutUS{
+  width: 100vw;
+}
 </style>

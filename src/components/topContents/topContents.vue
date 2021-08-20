@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped>
-
+#topContents{
+  width: 100vw;
+}
 </style>
