@@ -38,3 +38,4 @@
 * 在引入非官方依赖前需要联系负责人确认
 * 新人提交的代码需要进行code review
 * 引入了babel-plugin-import,在每次引用antd组件时需写成 `import { 组件名 } from 'ant-design-vue';`格式
+* 若使用less(推荐),需引入带有统一变量的`global.less`文件,位于`src/assets/`中
