@@ -67,6 +67,7 @@ const members = [
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   h3,
   h4 {
     margin: 0;
