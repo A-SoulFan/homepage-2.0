@@ -49,6 +49,7 @@ import {
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
+import SwiperType from 'swiper/types/swiper-class';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -63,7 +64,7 @@ export interface showList {
   img: string;
   videoUrl: string;
 }
-const refSwiper = ref(null);
+const refSwiper = ref<SwiperType>();
 
 const setControlledSwiper = (swiper: any) => {
   refSwiper.value = swiper;
@@ -92,7 +93,7 @@ const initCreateList = async () => {
 
 const setShowList = (key: string) => {
   activeTab.value = key;
-  refSwiper.value.slideTo(0);
+  refSwiper.value?.slideTo(0);
   activeIndex.value = 0;
   // activeTab.value = tab.key;
   if (activeTab.value === 'fragment') {
