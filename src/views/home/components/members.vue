@@ -114,9 +114,7 @@ const members = [
   top: 0;
   bottom: 0;
   background-repeat: no-repeat;
-  background-position: center bottom;
   background-size: cover;
-  // filter: grayscale(1);
   transition: all 0.3s;
 }
 .border {
