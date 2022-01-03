@@ -21,6 +21,12 @@
 <script lang="ts" setup>
 const members = [
   {
+    id: 672346917,
+    name: '向晚',
+    enName: 'Ava',
+    color: '#9ac8e2',
+  },
+  {
     id: 672353429,
     name: '贝拉',
     enName: 'Bella',
@@ -44,12 +50,6 @@ const members = [
     enName: 'Eileen',
     color: '#576690',
   },
-  {
-    id: 672346917,
-    name: '向晚',
-    enName: 'Ava',
-    color: '#9ac8e2',
-  },
 ];
 </script>
 <style lang="less" module>
@@ -68,6 +68,8 @@ const members = [
   background-size: cover;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: scale(1);
+  transition: all 0.3s;
   h3,
   h4 {
     margin: 0;
@@ -88,13 +90,14 @@ const members = [
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    // background-color: rgba(0, 0, 0, 0.4);
     transition: all 0.3s;
   }
   &:hover {
-    .bg {
-      filter: grayscale(0);
-    }
+    // .bg {
+    //   filter: grayscale(0);
+    // }
+    transform: scale(1.05);
     &::after,
     h3,
     h4,
@@ -113,7 +116,7 @@ const members = [
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: cover;
-  filter: grayscale(1);
+  // filter: grayscale(1);
   transition: all 0.3s;
 }
 .border {
