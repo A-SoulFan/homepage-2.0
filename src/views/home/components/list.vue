@@ -18,6 +18,7 @@
       :class="$style.swiper"
       :slides-per-view="3"
       :space-between="30"
+      :lazy="true"
       :centered-slides="true"
       :effect="'coverflow'"
       @swiper="setControlledSwiper"
@@ -29,7 +30,8 @@
         :class="$style['swiper-slide']"
         @click="toTargetUrl(item.videoUrl)"
       >
-        <img :src="item.img" />
+        <img :data-src="item.img" class="swiper-lazy" />
+        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
         <div :class="$style.title">
           {{ item.title }}
         </div>
@@ -39,7 +41,7 @@
 </template>
 <script lang="ts" setup>
 import Button from '@/components/button.vue';
-import { ref, reactive, onBeforeMount } from 'vue';
+import { ref, reactive, onBeforeMount, nextTick } from 'vue';
 import {
   getSliceList,
   getCreateList,
@@ -54,9 +56,10 @@ import SwiperType from 'swiper/types/swiper-class';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
+import 'swiper/css/lazy';
 
-import SwiperCore, { Navigation, EffectCoverflow } from 'swiper';
-SwiperCore.use([Navigation, EffectCoverflow]);
+import SwiperCore, { Navigation, EffectCoverflow, Lazy } from 'swiper';
+SwiperCore.use([Navigation, EffectCoverflow, Lazy]);
 
 export interface showList {
   title: string;
@@ -91,7 +94,7 @@ const initCreateList = async () => {
   fanMadeList.value = await getCreateList();
 };
 
-const setShowList = (key: string) => {
+const setShowList = async (key: string) => {
   activeTab.value = key;
   refSwiper.value?.slideTo(1);
   activeIndex.value = 1;
@@ -111,6 +114,8 @@ const setShowList = (key: string) => {
       videoUrl: `https://www.bilibili.com/video/${item.bvid}`,
     }));
   }
+  await nextTick();
+  refSwiper.value?.lazy.load();
 };
 
 const toTargetUrl = (url: string) => {
