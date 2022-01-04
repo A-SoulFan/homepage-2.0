@@ -77,7 +77,7 @@ const tabs = [
 ];
 
 const showList = ref<showList[]>([]);
-const activeIndex = ref(0);
+const activeIndex = ref(1);
 const clickSwiper = (event: any) => {
   activeIndex.value = event.activeIndex;
 };
@@ -93,8 +93,8 @@ const initCreateList = async () => {
 
 const setShowList = (key: string) => {
   activeTab.value = key;
-  refSwiper.value?.slideTo(0);
-  activeIndex.value = 0;
+  refSwiper.value?.slideTo(1);
+  activeIndex.value = 1;
   // activeTab.value = tab.key;
   if (activeTab.value === 'fragment') {
     showList.value = SliceList.value.map(item => ({
