@@ -16,11 +16,29 @@
     <swiper
       :navigation="true"
       :class="$style.swiper"
-      :slides-per-view="3"
+      :slides-per-view="ViewResize.perView"
       :space-between="30"
       :lazy="true"
       :centered-slides="true"
-      :effect="'coverflow'"
+      :effect="'creative'"
+      :pagination="true"
+      :creative-effect="{
+        prev: {
+          shadow: true,
+          translate: ['-100%', 0, '80px'],
+          rotate: [0, 20, 0],
+          origin: 'center center',
+          scale: 0.95,
+        },
+        next: {
+          translate: ['100%', 0, '80px'],
+          rotate: [0, -20, 0],
+          origin: 'center center ',
+          scale: 0.95,
+        },
+        limitProgress: 3,
+        progressMultiplier: 1,
+      }"
       @swiper="setControlledSwiper"
       @active-index-change="clickSwiper"
     >
@@ -32,11 +50,11 @@
       >
         <img :data-src="item.img" class="swiper-lazy" />
         <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        <div :class="$style.title">
-          {{ item.title }}
-        </div>
       </swiper-slide>
     </swiper>
+    <div :class="$style.swiperBottom">
+      {{ showList[activeIndex]?.title }}
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -54,12 +72,12 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import SwiperType from 'swiper/types/swiper-class';
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-creative';
 import 'swiper/css/navigation';
 import 'swiper/css/lazy';
 
-import SwiperCore, { Navigation, EffectCoverflow, Lazy } from 'swiper';
-SwiperCore.use([Navigation, EffectCoverflow, Lazy]);
+import SwiperCore, { Navigation, EffectCreative, Lazy } from 'swiper';
+SwiperCore.use([Navigation, EffectCreative, Lazy]);
 
 export interface showList {
   title: string;
@@ -80,7 +98,7 @@ const tabs = [
 ];
 
 const showList = ref<showList[]>([]);
-const activeIndex = ref(1);
+const activeIndex = ref(2);
 const clickSwiper = (event: any) => {
   activeIndex.value = event.activeIndex;
 };
@@ -96,8 +114,7 @@ const initCreateList = async () => {
 
 const setShowList = async (key: string) => {
   activeTab.value = key;
-  refSwiper.value?.slideTo(1);
-  activeIndex.value = 1;
+
   // activeTab.value = tab.key;
   if (activeTab.value === 'fragment') {
     showList.value = SliceList.value.map(item => ({
@@ -115,15 +132,54 @@ const setShowList = async (key: string) => {
     }));
   }
   await nextTick();
+
+  refSwiper.value?.slideTo(ViewResize.slideToNum);
+  activeIndex.value = ViewResize.slideToNum;
   refSwiper.value?.lazy.load();
 };
 
 const toTargetUrl = (url: string) => {
   window.open(url);
 };
+const ViewResize = reactive({
+  perView: 5,
+  slideToNum: 2,
+  size: 1000,
+});
+
+const setPerView = () => {
+  if (document.body.clientWidth > 900) {
+    ViewResize.perView = 5;
+    ViewResize.slideToNum = 2;
+    if (ViewResize.size !== 1000) {
+      ViewResize.size = 1000;
+      setShowList(activeTab.value);
+    }
+  } else if (
+    document.body.clientWidth < 900 &&
+    document.body.clientWidth > 768
+  ) {
+    ViewResize.perView = 3;
+    ViewResize.slideToNum = 1;
+    if (ViewResize.size !== 900) {
+      ViewResize.size = 900;
+      setShowList(activeTab.value);
+    }
+  } else {
+    ViewResize.perView = 2;
+    ViewResize.slideToNum = 1;
+    if (ViewResize.size !== 768) {
+      ViewResize.size = 768;
+      setShowList(activeTab.value);
+    }
+  }
+};
+
 onBeforeMount(async () => {
   await initSliceList();
   await initCreateList();
+  setPerView();
+  window.addEventListener('resize', setPerView);
   setShowList('fragment');
 });
 </script>
@@ -151,33 +207,18 @@ onBeforeMount(async () => {
 }
 .swiper {
   width: 100%;
-  height: 300px;
-  margin: 40px auto;
-  transform: scale3d(0px, 0px 500px);
+  height: 200px;
+  margin: 60px auto 0;
   .swiper-slide {
-    width: 450px;
-    height: 300px;
+    width: 300px;
+    // height: 80%;
     position: relative;
-    // background: url('../../assets/images/recommend/test.png') no-repeat;
     background-size: cover;
     color: #fff;
     font-size: 16px;
     z-index: 99;
     cursor: pointer;
-    // cursor: url('../../assets/images/recommend/cursor.png'), pointer;
-    // &::before {
-    //   content: '';
-    //   position: absolute;
-    //   left: 0;
-    //   right: 0;
-    //   top: 0;
-    //   bottom: 0;
-    //   background-color: rgba(0, 0, 0, 0.5);
-    //   transition: all 0.3s;
-    // }
-    // &:hover::before {
-    //   background-color: rgba(0, 0, 0, 0);
-    // }
+
     .txt {
       position: absolute;
       top: 188px;
@@ -186,7 +227,6 @@ onBeforeMount(async () => {
     }
     img {
       width: 100%;
-      // height: 100%;
       height: auto;
     }
     .date {
@@ -201,7 +241,20 @@ onBeforeMount(async () => {
   top: 188px;
   left: 20px;
   line-height: 24px;
-  font-size: 20px;
+  font-size: 12px;
   color: #f1f2f3;
+}
+.swiperBottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin-top: 30px;
+  height: calc(100vh - 605px);
+}
+@media screen and (max-width: 900px) {
+  .swiper {
+    height: 150px;
+  }
 }
 </style>

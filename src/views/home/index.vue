@@ -18,7 +18,7 @@
     </div>
   </div>
   <div :class="[$style.section, $style.bg2]">
-    <div :class="$style.content">
+    <div :class="$style.content" style="max-width: 100%">
       <Title>热门内容</Title>
       <List />
     </div>
