@@ -312,7 +312,6 @@ onBeforeMount(async () => {
 }
 @media screen and (max-width: 900px) {
   .swiper {
-    border: #fff 1px solid;
     height: 150px;
     margin-top: 20px;
   }
