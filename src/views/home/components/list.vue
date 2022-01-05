@@ -112,8 +112,6 @@ const tabs = [
 const showList = ref<showList[]>([]);
 const activeIndex = ref(2);
 const clickSwiper = (event: any) => {
-  console.log(event.activeIndex);
-
   activeIndex.value = event.activeIndex;
 };
 const changeSwiperIndex = (type: string) => {
