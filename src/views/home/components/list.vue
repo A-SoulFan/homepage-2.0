@@ -14,7 +14,6 @@
   </div>
   <div>
     <swiper
-      :navigation="true"
       :class="$style.swiper"
       :slides-per-view="ViewResize.perView"
       :space-between="30"
@@ -48,12 +47,25 @@
         :class="$style['swiper-slide']"
         @click="toTargetUrl(item.videoUrl)"
       >
-        <img :data-src="item.img" class="swiper-lazy" />
-        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+        <div :class="$style.swiperItemBox">
+          <img :data-src="item.img" class="swiper-lazy" />
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+        </div>
       </swiper-slide>
     </swiper>
     <div :class="$style.swiperBottom">
-      {{ showList[activeIndex]?.title }}
+      <div :class="$style.circular" @click="changeSwiperIndex('left')">
+        <img
+          style="transform: rotate(180deg)"
+          src="../../../assets/list/arrow.svg"
+        />
+      </div>
+      <div :class="$style.title">
+        {{ showList[activeIndex]?.title }}
+      </div>
+      <div :class="$style.circular" @click="changeSwiperIndex('right')">
+        <img src="../../../assets/list/arrow.svg" />
+      </div>
     </div>
   </div>
 </template>
@@ -100,8 +112,22 @@ const tabs = [
 const showList = ref<showList[]>([]);
 const activeIndex = ref(2);
 const clickSwiper = (event: any) => {
+  console.log(event.activeIndex);
+
   activeIndex.value = event.activeIndex;
 };
+const changeSwiperIndex = (type: string) => {
+  if (type === 'left' && activeIndex.value > 0) {
+    activeIndex.value--;
+  } else if (
+    type === 'right' &&
+    activeIndex.value < showList.value.length - 1
+  ) {
+    activeIndex.value++;
+  }
+  refSwiper.value?.slideTo(activeIndex.value);
+};
+
 const SliceList = ref<slice[]>([]);
 const initSliceList = async () => {
   SliceList.value = await getSliceList();
@@ -132,7 +158,6 @@ const setShowList = async (key: string) => {
     }));
   }
   await nextTick();
-
   refSwiper.value?.slideTo(ViewResize.slideToNum);
   activeIndex.value = ViewResize.slideToNum;
   refSwiper.value?.lazy.load();
@@ -225,6 +250,16 @@ onBeforeMount(async () => {
       left: 20px;
       line-height: 24px;
     }
+    .swiperItemBox {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s;
+    }
+    .swiperItemBox:hover {
+      transform: scale(1.15);
+    }
     img {
       width: 100%;
       height: auto;
@@ -245,16 +280,41 @@ onBeforeMount(async () => {
   color: #f1f2f3;
 }
 .swiperBottom {
+  position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  color: #fff;
   margin-top: 30px;
   height: calc(100vh - 605px);
+  min-height: 50px;
+  color: #fff;
+  .title {
+    margin: 0 20px;
+    width: 200px;
+  }
+  .circular {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px #999 solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    img {
+      width: 100%;
+    }
+  }
+  .circular:hover {
+    transform: scale(1.05);
+  }
 }
 @media screen and (max-width: 900px) {
   .swiper {
+    border: #fff 1px solid;
     height: 150px;
+    margin-top: 20px;
   }
 }
 </style>
