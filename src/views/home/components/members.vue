@@ -8,8 +8,8 @@
       target="_blank"
     >
       <div :class="[$style.bg, $style[member.enName.toLowerCase()]]" />
-      <h3>{{ member.name }}</h3>
-      <h4>{{ member.enName }}</h4>
+      <h3 style="text-shadow: 1px 1px #000">{{ member.name }}</h3>
+      <h4 style="text-shadow: 1px 1px #000">{{ member.enName }}</h4>
       <div :class="$style.border" :style="{ color: member.color }" />
       <div :class="$style.more">
         LEARN MORE
@@ -60,7 +60,8 @@ const members = [
 }
 .member {
   width: 220px;
-  height: 600px;
+  height: auto;
+  max-height: 600px;
   padding-top: 380px;
   position: relative;
   background-image: url('@/assets/member.jpg');
@@ -104,6 +105,9 @@ const members = [
     .border {
       opacity: 0;
     }
+    .more {
+      opacity: 1 !important;
+    }
   }
 }
 .bg {
@@ -128,6 +132,7 @@ const members = [
   transition: all 0.3s;
 }
 .more {
+  opacity: 0;
   position: absolute;
   display: flex;
   align-items: center;
@@ -142,6 +147,7 @@ const members = [
   background-color: #fff;
   text-align: left;
   font-weight: bold;
+  transition: all 0.3s;
   &::after {
     content: '';
     position: absolute;
