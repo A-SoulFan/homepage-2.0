@@ -256,7 +256,7 @@ onBeforeMount(async () => {
       transition: all 0.3s;
     }
     .swiperItemBox:hover {
-      transform: scale(1.15);
+      transform: scale(0.85);
     }
     img {
       width: 100%;
@@ -290,7 +290,7 @@ onBeforeMount(async () => {
     margin: 0 20px;
     width: 70%;
     max-width: 400px;
-    font-size: 16px;
+    font-size: 18px;
   }
   .circular {
     height: 50px;
@@ -317,7 +317,7 @@ onBeforeMount(async () => {
   }
   .swiperBottom {
     .title {
-      font-size: 12px;
+      font-size: 13px;
     }
   }
 }
