@@ -288,7 +288,9 @@ onBeforeMount(async () => {
   color: #fff;
   .title {
     margin: 0 20px;
-    width: 200px;
+    width: 70%;
+    max-width: 400px;
+    font-size: 16px;
   }
   .circular {
     height: 50px;
@@ -312,6 +314,11 @@ onBeforeMount(async () => {
   .swiper {
     height: 150px;
     margin-top: 20px;
+  }
+  .swiperBottom {
+    .title {
+      font-size: 12px;
+    }
   }
 }
 </style>
