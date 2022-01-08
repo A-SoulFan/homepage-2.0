@@ -19,7 +19,7 @@ export function searchFollowingUploaders(name: string) {
       mid: number;
       uname: string;
     }>;
-  }>(`${basePath}/cfj`, {
+  }>(`${basePath}/cfj/`, {
     method: 'GET',
     body: { name },
   }).then(({ list }) =>
