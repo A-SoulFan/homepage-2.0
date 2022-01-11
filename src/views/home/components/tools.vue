@@ -160,7 +160,7 @@ const handleCNKICheck = async () => {
 
       查重结果仅作参考，请注意辨别是否为原创
     `;
-    await clipboardWrite(template.trim().replace(/(?<=\n) */g, ''));
+    await clipboardWrite(template.trim().replace(/^\s*/g, ''));
     toast.success('已将枝网文本复制检测报告[简洁]复制至剪贴板');
   }
 };
