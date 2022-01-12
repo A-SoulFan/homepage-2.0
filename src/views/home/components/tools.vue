@@ -13,12 +13,7 @@
         src="@/assets/search.png"
         @click="handleSearchDict"
       />
-      <div :class="$style.result">
-        <div v-for="dict in dictResult" :key="dict.eid">
-          <h4>{{ dict.title }}</h4>
-          <p>{{ dict.content }}</p>
-        </div>
-      </div>
+      <div :class="$style.result"></div>
       <template #footer>
         <a target="_blank" href="https://tools.asoulfan.com/zhijiangDict">
           <img src="@/assets/link.png" />
@@ -39,17 +34,7 @@
         src="@/assets/search.png"
         @click="handleSearchUploaders"
       />
-      <div :class="$style.result">
-        <a
-          v-for="uploader in followingUploaders"
-          :key="uploader.mid"
-          :class="$style.uploader"
-        >
-          <img :src="uploader.face" />
-          <h4>{{ uploader.uname }}</h4>
-          <p>{{ uploader.desc }}</p>
-        </a>
-      </div>
+      <div :class="$style.result"></div>
       <template #footer>
         <a target="_blank" href="https://tools.asoulfan.com/ingredientChecking">
           <img src="@/assets/link.png" />
@@ -64,9 +49,10 @@
         placeholder="输入文章内容"
         type="search"
         rows="6"
+        @keyup.enter="handleCNKICheck"
       />
       <template #footer>
-        <Button @click="handleCNKICheck">复制结果</Button>
+        <Button @click="handleCNKICheck">查询结果</Button>
         <a target="_blank" href="https://tools.asoulfan.com/duplicateChecking">
           <img src="@/assets/link.png" />
           <span>查看更多</span>
@@ -102,12 +88,7 @@
 <script lang="tsx" setup>
 import { FunctionalComponent, reactive, ref, useCssModule } from 'vue';
 import { useToast } from 'vue-toastification';
-import dayjs from 'dayjs';
-import { clipboardWrite } from '@/utils';
 import Button from '@/components/button.vue';
-import { searchFollowingUploaders, Uploader } from '@/services/cfj';
-import { DictItem, searchDict } from '@/services/dict';
-import { cnkiCheck } from '@/services/cnki';
 
 const $style = useCssModule();
 
@@ -128,41 +109,24 @@ const model = reactive({
   article: '',
 });
 
-const dictResult = ref<DictItem[]>([]);
-const handleSearchDict = async () =>
-  (dictResult.value = model.dict ? await searchDict(model.dict) : []);
+const handleSearchDict = async () => {
+  const url = import.meta.env.VITE_WEBSITE_TOOL_DICT as string;
+  debugger;
+  window.open(`${url}?search=${encodeURIComponent(model.dict)}`);
+};
 
-const followingUploaders = ref<Uploader[]>([]);
-const handleSearchUploaders = async () =>
-  (followingUploaders.value = model.uploader
-    ? await searchFollowingUploaders(model.uploader)
-    : []);
+const handleSearchUploaders = () => {
+  const url = import.meta.env.VITE_WEBSITE_TOOL_INGREDIENT as string;
+  window.open(`${url}?search=${encodeURIComponent(model.uploader)}`);
+};
 
 const toast = useToast();
 const handleCNKICheck = async () => {
   if (model.article.length <= 10) {
     toast.error('查重至少十个字哦');
   }
-  const result = await cnkiCheck(model.article);
-  const related = result.related[0];
-  if (result.rate === 0 && related) {
-    toast.success('没有找到重复的小作文捏');
-  } else {
-    const template = `
-      @ProJectASF × 枝网文本复制检测报告[简洁]
-      查重时间：${dayjs().format('YYYY-MM-DD HH:mm:ss')}
-      总文字复制比：${(result.rate * 100).toFixed(2)}%
-      相似小作文：${related.reply_url}
-      作者：${related.reply.m_name}
-      发表时间：${dayjs(related.reply.ctime * 1000).format(
-        'YYYY-MM-DD HH:mm:ss',
-      )}
-
-      查重结果仅作参考，请注意辨别是否为原创
-    `;
-    await clipboardWrite(template.trim().replace(/^\s*/g, ''));
-    toast.success('已将枝网文本复制检测报告[简洁]复制至剪贴板');
-  }
+  const url = import.meta.env.VITE_WEBSITE_TOOL_DUPLICATE as string;
+  window.open(`${url}?search=${encodeURIComponent(model.article)}`);
 };
 </script>
 <style lang="less" module>
