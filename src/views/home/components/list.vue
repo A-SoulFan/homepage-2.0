@@ -144,14 +144,14 @@ const setShowList = async (key: string) => {
     showList.value = SliceList.value.map(item => ({
       title: item.title,
       view: item.play_val,
-      img: item.image_url,
+      img: item.image_url.replace('http://', 'https://'),
       videoUrl: item.url,
     }));
   } else if (activeTab.value === 'fanmade') {
     showList.value = fanMadeList.value.map(item => ({
       title: item.title,
       view: item.stat_view.toString(),
-      img: item.pic,
+      img: item.pic.replace('http://', 'https://'),
       videoUrl: `https://www.bilibili.com/video/${item.bvid}`,
     }));
   }
