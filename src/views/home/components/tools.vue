@@ -109,9 +109,8 @@ const model = reactive({
   article: '',
 });
 
-const handleSearchDict = async () => {
+const handleSearchDict = () => {
   const url = import.meta.env.VITE_WEBSITE_TOOL_DICT as string;
-  debugger;
   window.open(`${url}?search=${encodeURIComponent(model.dict)}`);
 };
 
@@ -121,7 +120,7 @@ const handleSearchUploaders = () => {
 };
 
 const toast = useToast();
-const handleCNKICheck = async () => {
+const handleCNKICheck = () => {
   if (model.article.length <= 10) {
     toast.error('查重至少十个字哦');
   }
