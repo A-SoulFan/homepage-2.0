@@ -1,13 +1,11 @@
 import { createApp, h } from 'vue';
-import { RouterView } from 'vue-router';
+import APP from './APP.vue';
+// import { RouterView } from 'vue-router';
 import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 
-import './index.less';
+import './assets/css/index.less';
 
 import router from './router';
 
-createApp({ render: () => h(RouterView) })
-  .use(router)
-  .use(Toast)
-  .mount('#app');
+createApp(APP).use(router).use(Toast).mount('#app');

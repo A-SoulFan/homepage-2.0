@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <!-- <Navbar /> -->
   <div :class="[$style.section, $style.cover]">
     <div :class="$style.coverContent">
       <h1 :class="$style.title">
@@ -31,7 +31,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import Navbar from '@/components/navbar.vue';
+// import Navbar from '@/components/navbar.vue';
 import Title from './components/title.vue';
 import Members from './components/members.vue';
 import List from './components/list.vue';
