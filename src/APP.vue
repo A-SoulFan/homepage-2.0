@@ -9,8 +9,7 @@
       <router-view :class="$style.routerView"></router-view>
     </transition>
   </div> -->
-
-  <router-view v-slot="{ Component }" :class="$style.routerView">
+  <router-view v-slot="{ Component }" class="routerView">
     <transition :name="transitionName">
       <component :is="Component" />
     </transition>
@@ -229,21 +228,11 @@ onUnmounted(() => {
 //   },
 // };
 </script>
-<style lang="less" module>
-// .logo {
-//   position: fixed;
-//   left: 50%;
-//   top: 15px;
-//   z-index: 10;
-//   width: 153px;
-//   margin-left: -76px;
-//   img {
-//     width: 100%;
-//   }
-// }
+<style lang="less">
 .routerView {
   // min-height: 1200px;
   height: 100%;
+  width: 100%;
   overflow: hidden;
   position: absolute;
 }
@@ -257,60 +246,52 @@ onUnmounted(() => {
 // }
 
 .slide-right-enter-active {
-  animation: slideRightEnter 0.3s;
+  animation: slideRightEnter 3s;
 }
 
 .slide-right-leave-active {
-  animation: slideRightLeave 0.3s;
+  animation: slideRightLeave 3s;
 }
 
 .slide-left-leave-active {
-  animation: slideLeftLeave 0.3s;
+  animation: slideLeftLeave 3s;
 }
 
 .slide-left-enter-active {
-  animation: slideLeftEnter 0.3s;
+  animation: slideLeftEnter 3s;
 }
 
 @keyframes slideRightEnter {
   from {
-    -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
   to {
-    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
 }
 @keyframes slideRightLeave {
   from {
-    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   to {
-    -webkit-transform: translateX(100%);
     transform: translateX(100%);
   }
 }
 
 @keyframes slideLeftEnter {
   from {
-    -webkit-transform: translateX(100%);
     transform: translateX(100%);
   }
   to {
-    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
 }
 
 @keyframes slideLeftLeave {
   from {
-    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   to {
-    -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
 }
