@@ -17,7 +17,7 @@ export default createRouter({
       path: '/homePage',
       name: 'HomePage',
       meta: {
-        pageIndex: 1,
+        pageIndex: 0,
       },
       component: HomePage,
     },
@@ -25,7 +25,7 @@ export default createRouter({
       path: '/member',
       name: 'Member',
       meta: {
-        pageIndex: 2,
+        pageIndex: 1,
       },
       component: Member,
     },
@@ -33,7 +33,7 @@ export default createRouter({
       path: '/popular',
       name: 'Popular',
       meta: {
-        pageIndex: 3,
+        pageIndex: 2,
       },
       component: Popular,
     },
@@ -41,7 +41,7 @@ export default createRouter({
       path: '/tool',
       name: 'Tool',
       meta: {
-        pageIndex: 4,
+        pageIndex: 3,
       },
       component: Tool,
     },

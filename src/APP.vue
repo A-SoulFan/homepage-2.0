@@ -4,22 +4,102 @@
   <!-- <NavBar></NavBar>
   <Aside></Aside>
   <Footer></Footer> -->
-  <div>
+  <!-- <div>
     <transition :name="transitionName">
       <router-view :class="$style.routerView"></router-view>
     </transition>
-  </div>
+  </div> -->
+
+  <router-view v-slot="{ Component }" :class="$style.routerView">
+    <transition :name="transitionName">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
-<script>
-// import "animate.css";
-// import NavBar from "@/components/NavBar.vue";
-// import Aside from "@/views/Aside.vue";
-// import Footer from "@/views/Footer.vue";
+<script lang="ts" setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 
+import { useRouter } from 'vue-router';
+
+// 滚轮监听事件
 // //节流时间  单位 ms
-// const THROTTLE_TIME = 500;
+const THROTTLE_TIME = 500;
+let lockWheel = false;
+const watchWheel = (e: any) => {
+  if (!lockWheel) {
+    setTimeout(() => {
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+      const scrollHeight = document.documentElement.scrollHeight;
 
+      if (e.wheelDelta > 0 && scrollTop === 0) {
+        wheelRouteJump('up');
+      } else if (e.wheelDelta < 0 && scrollTop + clientHeight >= scrollHeight) {
+        wheelRouteJump('down');
+      }
+      lockWheel = false;
+    }, THROTTLE_TIME);
+
+    lockWheel = true;
+  }
+};
+
+const transitionName = ref('slide-left');
+const routeList = [
+  {
+    name: 'HomePage',
+    pageIndex: 0,
+  },
+  {
+    name: 'Member',
+    pageIndex: 1,
+  },
+  {
+    name: 'Popular',
+    pageIndex: 2,
+  },
+  {
+    name: 'Tool',
+    pageIndex: 3,
+  },
+];
+let routeIndex = 0;
+const router = useRouter();
+
+const wheelRouteJump = (dir: string) => {
+  if (dir === 'up') {
+    transitionName.value = 'slide-right';
+
+    if (routeIndex === 0) {
+      routeIndex = 3;
+    } else {
+      routeIndex--;
+    }
+  } else if (dir === 'down') {
+    transitionName.value = 'slide-left';
+    if (routeIndex === 3) {
+      routeIndex = 0;
+    } else {
+      routeIndex++;
+    }
+  }
+
+  const name = routeList.find(ele => ele.pageIndex === routeIndex)!.name;
+  console.log(name);
+
+  router.push({ name, params: { wheelRoutePush: 'true' } });
+  // this.$router.push({ name, params: { wheelRoutePush: true } });
+  document.documentElement.scrollTop = 0;
+};
+
+onMounted(() => {
+  window.addEventListener('wheel', watchWheel);
+});
+// FIXME: 是否需要卸载监听
+onUnmounted(() => {
+  window.removeEventListener('wheel', watchWheel);
+});
 // export default {
 //   name: "App",
 //   components: {
@@ -168,13 +248,13 @@
   position: absolute;
 }
 
-.slide-right-enter-active,
-.slide-right-leave-active,
-.slide-left-leave-active,
-.slide-left-enter-active {
-  position: absolute;
-  width: 100%;
-}
+// .slide-right-enter-active,
+// .slide-right-leave-active,
+// .slide-left-leave-active,
+// .slide-left-enter-active {
+//   position: absolute;
+//   width: 100%;
+// }
 
 .slide-right-enter-active {
   animation: slideRightEnter 0.3s;
