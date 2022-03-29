@@ -154,7 +154,6 @@ onUnmounted(() => {
       opacity: 1;
     }
   }
-  // background: url("../assets/img/member/member.jpg") no-repeat center / cover;
   h3 {
     z-index: 3;
     font-size: 38px;
@@ -163,6 +162,7 @@ onUnmounted(() => {
     transition: opacity ease-in-out 0.3s;
   }
   .nameBorder {
+    z-index: 1;
     width: 141px;
     height: 17px;
     margin-top: -56px;
@@ -240,7 +240,7 @@ onUnmounted(() => {
 }
 .imgBox4 {
   animation: fadeIn 0.5s ease-in-out both 0.5s,
-    shake4 5s ease-in-out infinite 1s;
+    shake4 8s ease-in-out infinite 1s;
 }
 .imgBox5 {
   animation: fadeIn 0.5s ease-in-out both 0.5s,

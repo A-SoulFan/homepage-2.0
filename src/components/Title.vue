@@ -8,7 +8,7 @@
 <style lang="less" module>
 .title {
   margin: 0;
-  padding: 100px 10px;
+  padding: 100px 10px 0px;
   text-align: center;
   font-size: 48px;
   color: #fff;
