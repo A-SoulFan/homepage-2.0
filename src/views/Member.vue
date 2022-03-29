@@ -14,7 +14,10 @@
           <br />
           {{ member.enName }}
         </h3>
-        <div :class="$style.nameBorder" :style="{ 'background-color': member.color }"></div>
+        <div
+          :class="$style.nameBorder"
+          :style="{ 'background-color': member.color }"
+        ></div>
         <div :class="$style.more">
           LEARN MORE
           <div :class="$style.arrow" />
@@ -116,7 +119,7 @@ onUnmounted(() => {
   padding-top: 100px;
   height: 100%;
   width: 100%;
-  background: url("../assets/img/member/bg.jpg") no-repeat center / cover;
+  background: url('../assets/img/member/bg.jpg') no-repeat center / cover;
   object-fit: cover;
 }
 .title {
@@ -137,7 +140,7 @@ onUnmounted(() => {
   padding-top: 408px;
   border-radius: 4px;
   box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
-  background-image: url("../assets/img/member/member.jpg");
+  background-image: url('../assets/img/member/member.jpg');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 110% 110%;
@@ -190,7 +193,7 @@ onUnmounted(() => {
     font-weight: bold;
     transition: opacity ease-in-out 0.3s;
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       right: 0;
       bottom: -10px;
@@ -203,13 +206,13 @@ onUnmounted(() => {
       display: flex;
       align-items: center;
       &::before {
-        content: "";
+        content: '';
         height: 1px;
         background-color: #000;
         width: 22px;
       }
       &::after {
-        content: "";
+        content: '';
         border: 4px solid;
         border-top-color: transparent;
         border-right-color: transparent;

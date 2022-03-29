@@ -51,13 +51,18 @@
         >
           <div :class="$style.swiperItemBox">
             <img :data-src="item.img" class="swiper-lazy" />
-            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+            <div
+              class="swiper-lazy-preloader swiper-lazy-preloader-white"
+            ></div>
           </div>
         </swiper-slide>
       </swiper>
       <div :class="$style.swiperBottom">
         <div :class="$style.circular" @click="changeSwiperIndex('left')">
-          <img style="transform: rotate(180deg)" src="../assets/img/popular/arrow.svg" />
+          <img
+            style="transform: rotate(180deg)"
+            src="../assets/img/popular/arrow.svg"
+          />
         </div>
         <div :class="$style.title">{{ showList[activeIndex]?.title }}</div>
         <div :class="$style.circular" @click="changeSwiperIndex('right')">
@@ -207,7 +212,7 @@ onBeforeMount(async () => {
   height: 100%;
   width: 100%;
   color: #fff;
-  background: url("../assets/img/popular/bg.jpg");
+  background: url('../assets/img/popular/bg.jpg');
 }
 .pageTitle {
   position: absolute;

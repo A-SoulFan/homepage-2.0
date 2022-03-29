@@ -44,7 +44,7 @@ const toolList = [
   padding-top: 100px;
   height: 100%;
   width: 100%;
-  background: url("../assets/img/tool/bg.jpg") no-repeat center / cover;
+  background: url('../assets/img/tool/bg.jpg') no-repeat center / cover;
   object-fit: cover;
 }
 .title {
@@ -71,7 +71,7 @@ const toolList = [
     padding: 25px 21px;
     background: rgba(255, 255, 255, 0.1);
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 10;
       left: 0;

@@ -20,7 +20,7 @@
 .HomePage {
   height: 100%;
   width: 100%;
-  background: no-repeat url("../assets/img/homePage/cover.jpg") center / cover;
+  background: no-repeat url('../assets/img/homePage/cover.jpg') center / cover;
 }
 
 .coverContent {

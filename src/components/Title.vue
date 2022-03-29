@@ -15,16 +15,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "黑体", sans-serif;
+  font-family: '黑体', sans-serif;
   font-weight: bold;
   animation: fadeInDown ease-in-out 0.5s;
   &::before,
   &::after {
-    content: "";
+    content: '';
     width: 232px;
     height: 30px;
     margin: 0 50px;
-    background: url("@/assets/img/arrow.png") no-repeat;
+    background: url('@/assets/img/arrow.png') no-repeat;
     background-size: cover;
   }
   &::before {

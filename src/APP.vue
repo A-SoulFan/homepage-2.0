@@ -14,7 +14,7 @@ import { ref, onMounted, onUnmounted, defineComponent } from 'vue';
 
 import { useRouter } from 'vue-router';
 
-import NavBar from './components/navbar.vue';
+import NavBar from '@/components/Navbar.vue';
 
 export default defineComponent({
   components: {
@@ -93,7 +93,6 @@ export default defineComponent({
       }
 
       const name = routeList.find(ele => ele.pageIndex === routeIndex)!.name;
-      console.log(name);
 
       router.push({ name, params: { wheelRoutePush: 'true' } });
       // this.$router.push({ name, params: { wheelRoutePush: true } });

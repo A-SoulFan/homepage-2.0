@@ -110,8 +110,8 @@ const MenuItem = (menu: MenuItem) => (
 }
 .logo {
   background-color: #fff;
-  -webkit-mask: url("/favicon.svg") no-repeat left center;
-  mask: url("/favicon.svg") no-repeat left center;
+  -webkit-mask: url('/favicon.svg') no-repeat left center;
+  mask: url('/favicon.svg') no-repeat left center;
   width: 100px;
   height: 100px;
 }
