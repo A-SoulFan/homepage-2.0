@@ -1,14 +1,7 @@
 <template>
-  <!-- <Navbar /> -->
-  <!-- <h1 class="logo"><img src="./assets/images/logo.png" alt="" /></h1> -->
-  <!-- <NavBar></NavBar>
-  <Aside></Aside>
-  <Footer></Footer> -->
-  <!-- <div>
-    <transition :name="transitionName">
-      <router-view :class="$style.routerView"></router-view>
-    </transition>
-  </div> -->
+  <NavBar class="navbar"></NavBar>
+  <!-- <Aside></Aside>
+  <Footer></Footer>-->
   <router-view v-slot="{ Component }" class="routerView">
     <transition :name="transitionName">
       <component :is="Component" />
@@ -17,29 +10,28 @@
 </template>
 
 <script lang="ts">
-import {
-  ref,
-  onMounted,
-  onUnmounted,
-  defineComponent,
-  watch,
-  nextTick,
-} from 'vue';
+import { ref, onMounted, onUnmounted, defineComponent } from 'vue';
 
 import { useRouter } from 'vue-router';
 
+import NavBar from './components/navbar.vue';
+
 export default defineComponent({
+  components: {
+    NavBar,
+  },
   setup() {
     // 滚轮监听事件
     // //节流时间  单位 ms
-    const THROTTLE_TIME = 500;
+    const THROTTLE_TIME = 300;
     let lockWheel = false;
     const watchWheel = (e: any) => {
       if (!lockWheel) {
         setTimeout(() => {
-          const scrollTop = document.documentElement.scrollTop;
-          const clientHeight = document.documentElement.clientHeight;
-          const scrollHeight = document.documentElement.scrollHeight;
+          const documentElement = document.documentElement;
+          const scrollTop = documentElement.scrollTop;
+          const clientHeight = documentElement.clientHeight;
+          const scrollHeight = documentElement.scrollHeight;
 
           if (e.wheelDelta > 0 && scrollTop === 0) {
             wheelRouteJump('up');
@@ -86,14 +78,14 @@ export default defineComponent({
     });
     const wheelRouteJump = (dir: string) => {
       if (dir === 'up') {
-        transitionName.value = 'slide-right';
+        transitionName.value = 'slide-down';
 
         if (routeIndex === 0) {
           return;
         }
         routeIndex--;
       } else if (dir === 'down') {
-        transitionName.value = 'slide-left';
+        transitionName.value = 'slide-up';
         if (routeIndex === 3) {
           return;
         }
@@ -121,40 +113,44 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="less">
+<style lang="less" scoped>
+.navbar {
+  animation: fadeIn 0.5s ease-in-out both;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .routerView {
   // min-height: 1200px;
   height: 100%;
+  min-height: 760px;
   width: 100%;
   overflow: hidden;
   position: absolute;
 }
 
-// .slide-right-enter-active,
-// .slide-right-leave-active,
-// .slide-left-leave-active,
-// .slide-left-enter-active {
-//   position: absolute;
-//   width: 100%;
-// }
-
-.slide-right-enter-active {
-  animation: slideRightEnter 0.3s ease-in-out;
+.slide-down-enter-active {
+  animation: slideDownEnter 0.15s ease-in-out;
 }
 
-.slide-right-leave-active {
-  animation: slideRightLeave 0.3s ease-in-out;
+.slide-down-leave-active {
+  animation: slideDownLeave 0.15s ease-in-out;
 }
 
-.slide-left-leave-active {
-  animation: slideLeftLeave 0.3s ease-in-out;
+.slide-up-leave-active {
+  animation: slideUpLeave 0.15s ease-in-out;
 }
 
-.slide-left-enter-active {
-  animation: slideLeftEnter 0.3s ease-in-out;
+.slide-up-enter-active {
+  animation: slideUpEnter 0.15s ease-in-out;
 }
 
-@keyframes slideRightEnter {
+@keyframes slideDownEnter {
   from {
     transform: translateY(-100%);
   }
@@ -162,7 +158,7 @@ export default defineComponent({
     transform: translateY(0);
   }
 }
-@keyframes slideRightLeave {
+@keyframes slideDownLeave {
   from {
     transform: translateY(0);
   }
@@ -171,7 +167,7 @@ export default defineComponent({
   }
 }
 
-@keyframes slideLeftEnter {
+@keyframes slideUpEnter {
   from {
     transform: translateY(100%);
   }
@@ -180,7 +176,7 @@ export default defineComponent({
   }
 }
 
-@keyframes slideLeftLeave {
+@keyframes slideUpLeave {
   from {
     transform: translateY(0);
   }

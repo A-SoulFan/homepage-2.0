@@ -2,11 +2,15 @@
   <div :class="[$style.HomePage, $style.cover]">
     <div :class="$style.coverContent">
       <h1 :class="$style.title">
-        ASOUL FAN,<br />
-        属于一个魂的小城堡捏
+        ASOUL FAN,
+        <br />属于一个魂的小城堡捏
       </h1>
       <p :class="$style.intro">
-        A-SOUL是字节跳动旗下、乐华娱乐年度最新企划中打造的虚拟偶像女团，成员由向晚（Ava）、贝拉（Bella）、珈乐（Carol）、嘉然（Diana）、乃琳（Eileen）五人组成，于2020年11月以“乐华娱乐首个虚拟偶像团体”名义出道。2020年12月2日,发行团体第一张单曲《Quiet》；12月11日，进行了团体第一场线上直播。2021年4月30日，发布第二张单曲《超级敏感》，正式开启第二张单曲的宣传活动
+        A-SOUL是字节跳动旗下、乐华娱乐年度最新企划中打造的虚拟偶像女团，
+        成员由向晚（Ava）、贝拉（Bella）、珈乐（Carol）、嘉然（Diana）、
+        乃琳（Eileen）五人组成，于2020年11月以“乐华娱乐首个虚拟偶像团体”名义出道。
+        2020年12月2日,发行团体第一张单曲《Quiet》；12月11日，进行了团体第一场线上直播。
+        2021年4月30日，发布第二张单曲《超级敏感》，正式开启第二张单曲的宣传活动
       </p>
     </div>
   </div>
@@ -16,6 +20,49 @@
 .HomePage {
   height: 100%;
   width: 100%;
-  background-image: url('../assets/img/homePage/cover.jpg');
+  background: no-repeat url("../assets/img/homePage/cover.jpg") center / cover;
+}
+
+.coverContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -223px 0px 0px -383px;
+  width: 766px;
+  color: #ffffff;
+  user-select: none;
+  .title {
+    font-size: 72px;
+    margin-bottom: 126px;
+    animation: fadeInDown 0.5s ease-in-out both;
+  }
+  .intro {
+    font-size: 17px;
+    line-height: 26px;
+    text-indent: 38px;
+    animation: fadeInRight 0.5s ease-in-out both 0.5s;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-400px);
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
 }
 </style>
