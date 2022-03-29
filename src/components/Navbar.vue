@@ -6,7 +6,7 @@
         <div :class="$style.menuBar1" />
         <div :class="$style.menuBar2" />
         <div :class="$style.menuBar3" />
-      </div> -->
+      </div>-->
       <div :class="$style.menu">
         <MenuItem v-for="menu in menus" :key="menu.url" v-bind="menu" />
       </div>
@@ -110,8 +110,8 @@ const MenuItem = (menu: MenuItem) => (
 }
 .logo {
   background-color: #fff;
-  -webkit-mask: url('/favicon.svg') no-repeat left center;
-  mask: url('/favicon.svg') no-repeat left center;
+  -webkit-mask: url("/favicon.svg") no-repeat left center;
+  mask: url("/favicon.svg") no-repeat left center;
   width: 100px;
   height: 100px;
 }

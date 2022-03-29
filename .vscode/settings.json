@@ -12,4 +12,7 @@
   "editor.detectIndentation": false,
   "eslint.validate": ["javascript", "javascriptreact", "vue"],
   "editor.formatOnSave":true,
+  "editor.codeActionsOnSave": {
+         "source.fixAll.eslint": true,
+  },
 }
