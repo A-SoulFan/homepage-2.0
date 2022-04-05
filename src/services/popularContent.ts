@@ -1,6 +1,6 @@
 import { request } from './request';
 
-const slicePath = 'https://support-api.asoulfan.com/api/recommend-slice';
+const slicePath = 'https://api-v2.asoulfan.com/api/recommend-slice';
 const createPath =
   'https://api.asoul.cloud:8000/getBV?page=1&tag_id=0&sort=4&part=0&rank=0&ctime=0&type=1';
 
